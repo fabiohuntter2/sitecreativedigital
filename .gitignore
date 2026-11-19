@@ -12,7 +12,7 @@ next-env.d.ts
 .env.vercel
 
 # dados locais (banco em arquivo e uploads)
-data/
+/data/
 *.tmp
 
 # configurações locais do editor/assistente
