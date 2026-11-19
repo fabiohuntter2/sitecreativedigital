@@ -81,6 +81,8 @@ export const settingsSchema = z.object({
     aboutTitle: z.string().max(200),
     aboutText: z.string().max(4000),
     aboutImage: z.string().max(1000),
+    aboutPersonName: z.string().max(120),
+    aboutPersonRole: z.string().max(120),
     ctaTitle: z.string().max(200),
     ctaText: z.string().max(400),
     footerText: z.string().max(400),

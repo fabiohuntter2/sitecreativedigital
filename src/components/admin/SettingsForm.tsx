@@ -27,6 +27,8 @@ const GROUPS: { section: Section; title: string; desc: string; fields: F[] }[] =
       { key: "aboutTitle", label: "Quem somos — título" },
       { key: "aboutText", label: "Quem somos — texto", type: "textarea", help: "Separe parágrafos com uma linha em branco." },
       { key: "aboutImage", label: "Quem somos — foto", type: "upload", help: "Formato retrato (4:5) recomendado." },
+      { key: "aboutPersonName", label: "Quem somos — nome de quem aparece na foto", help: "Ex.: Fabio Huntter. Vazio = mostra o nome da empresa." },
+      { key: "aboutPersonRole", label: "Quem somos — cargo", help: "Ex.: CEO. Vazio = mostra o slogan." },
       { key: "ctaTitle", label: "Chamada comercial — título" },
       { key: "ctaText", label: "Chamada comercial — texto", type: "textarea" },
       { key: "footerText", label: "Texto do rodapé", type: "textarea" },

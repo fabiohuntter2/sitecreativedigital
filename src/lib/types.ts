@@ -118,6 +118,8 @@ export type Settings = {
     aboutTitle: string;
     aboutText: string;
     aboutImage: string;
+    aboutPersonName: string;
+    aboutPersonRole: string;
     ctaTitle: string;
     ctaText: string;
     footerText: string;

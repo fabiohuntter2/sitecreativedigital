@@ -39,7 +39,7 @@ export function AboutSection({ settings }: { settings: Settings }) {
         <div className="reveal relative order-2 lg:order-1">
           <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-graphite to-ink">
             {site.aboutImage ? (
-              <SmartImage src={site.aboutImage} alt={`Equipe ${site.name}`} fill sizes="(max-width: 1024px) 90vw, 450px" className="object-cover" />
+              <SmartImage src={site.aboutImage} alt={site.aboutPersonName ? `${site.aboutPersonName}${site.aboutPersonRole ? `, ${site.aboutPersonRole}` : ""} da ${site.name}` : `Equipe ${site.name}`} fill sizes="(max-width: 1024px) 90vw, 450px" className="object-cover object-top" />
             ) : (
               <div className="grid h-full place-items-center">
                 <LogoMark className="h-40 w-40 opacity-90" />
@@ -47,8 +47,10 @@ export function AboutSection({ settings }: { settings: Settings }) {
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
             <div className="absolute inset-x-5 bottom-5 glass rounded-2xl p-4">
-              <p className="font-display text-sm font-semibold">{site.name}</p>
-              <p className="mt-0.5 text-xs text-green">{site.slogan}</p>
+              <p className="font-display text-sm font-semibold">{site.aboutPersonName || site.name}</p>
+              <p className="mt-0.5 text-xs text-green">
+                {site.aboutPersonName ? [site.aboutPersonRole, site.name].filter(Boolean).join(" · ") : site.slogan}
+              </p>
             </div>
           </div>
           <div aria-hidden="true" className="absolute -left-6 -top-6 -z-10 h-40 w-40 rounded-full bg-purple/40 blur-3xl" />
