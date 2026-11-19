@@ -47,7 +47,7 @@ export const schemas = {
     title: z.string().trim().min(2).max(160),
     subtitle: z.string().max(200).default(""),
     kind: z.enum(["audio", "video"]),
-    category: z.enum(["musica", "estudio", "videoclipe", "comercial", "ia"]),
+    category: z.enum(["musica", "estudio", "videoclipe", "comercial", "audiovisual", "ia"]),
     url: z.string().trim().min(1, "Envie o arquivo ou cole o link").max(1000),
     cover_url: url,
     is_example: bool,

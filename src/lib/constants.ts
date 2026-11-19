@@ -22,6 +22,7 @@ export const SHOWCASE_CATEGORIES: { value: ShowcaseCategory; label: string }[] =
   { value: "estudio", label: "Produções do estúdio" },
   { value: "videoclipe", label: "Videoclipes" },
   { value: "comercial", label: "Comerciais" },
+  { value: "audiovisual", label: "Produções audiovisuais" },
   { value: "ia", label: "Inteligência artificial" },
 ];
 

@@ -51,7 +51,7 @@ create table if not exists public.media (
   title text not null,
   subtitle text not null default '',
   kind text not null check (kind in ('audio','video')),
-  category text not null check (category in ('musica','estudio','videoclipe','comercial','ia')),
+  category text not null check (category in ('musica','estudio','videoclipe','comercial','audiovisual','ia')),
   url text not null,
   cover_url text not null default '',
   is_example boolean not null default false,

@@ -52,7 +52,7 @@ export type PortfolioItem = {
 };
 
 export type ShowcaseKind = "audio" | "video";
-export type ShowcaseCategory = "musica" | "estudio" | "videoclipe" | "comercial" | "ia";
+export type ShowcaseCategory = "musica" | "estudio" | "videoclipe" | "comercial" | "audiovisual" | "ia";
 
 export type ShowcaseMedia = {
   id: string;
