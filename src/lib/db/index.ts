@@ -1,4 +1,5 @@
 import type { Settings, TableMap, TableName } from "@/lib/types";
+import { supabaseServiceKey, supabaseUrl } from "@/lib/env";
 import { jsonDriver } from "./json-driver";
 import { supabaseDriver } from "./supabase-driver";
 
@@ -15,7 +16,7 @@ export interface DbDriver {
 }
 
 export function isSupabaseConfigured() {
-  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return Boolean(supabaseUrl() && supabaseServiceKey());
 }
 
 export function db(): DbDriver {

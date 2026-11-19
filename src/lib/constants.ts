@@ -1,6 +1,11 @@
 import type { PortfolioCategory, QuoteStatus, ShowcaseCategory } from "@/lib/types";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+// Endereço público: variável própria > domínio de produção informado pela Vercel > localhost
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "") ||
+  "http://localhost:3000"
+).replace(/\/$/, "");
 
 export const PORTFOLIO_CATEGORIES: { value: PortfolioCategory; label: string }[] = [
   { value: "sites", label: "Sites" },

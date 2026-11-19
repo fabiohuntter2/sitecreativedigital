@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { jwtVerify } from "jose";
+import { sessionSecret } from "@/lib/env";
 import { isSupabaseConfigured } from "@/lib/db";
 import { resolveLocalPath } from "@/lib/storage";
 
@@ -12,7 +13,7 @@ export async function PUT(req: Request) {
   const objectPath = url.searchParams.get("path") || "";
   const token = url.searchParams.get("token") || "";
   try {
-    const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.AUTH_SECRET || ""));
+    const { payload } = await jwtVerify(token, (await sessionSecret())!);
     if (payload.path !== objectPath) throw new Error("token");
     const buf = Buffer.from(await req.arrayBuffer());
     if (buf.length > Number(payload.max) + 1024) return NextResponse.json({ error: "Arquivo maior que o informado" }, { status: 413 });

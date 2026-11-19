@@ -6,7 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { adminPasswordHash, clearSessionCookie, createSessionToken, isAuthConfigured, requireAdmin, setSessionCookie } from "@/lib/auth";
+import { clearSessionCookie, createSessionToken, getAdminCredentials, requireAdmin, setSessionCookie } from "@/lib/auth";
+import { sessionSecret } from "@/lib/env";
 import { schemas, settingsSchema, type EditableTable } from "@/lib/admin-schemas";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import type { QuoteStatus, Settings } from "@/lib/types";
@@ -16,8 +17,9 @@ export type ActionResult = { ok: true; id?: string } | { ok: false; error: strin
 /* ---------------------------- autenticação ---------------------------- */
 
 export async function loginAction(_: unknown, formData: FormData): Promise<{ error: string } | undefined> {
-  if (!isAuthConfigured()) {
-    return { error: "Login não configurado. Defina ADMIN_EMAIL, ADMIN_PASSWORD_HASH e AUTH_SECRET (veja o README)." };
+  const creds = await getAdminCredentials();
+  if (!creds || !(await sessionSecret())) {
+    return { error: "Login não configurado. Veja o README (seção 4)." };
   }
   const ip = await clientIp(headers());
   if (!rateLimit(`login:${ip}`, 6, 15 * 60_000).ok) {
@@ -25,9 +27,9 @@ export async function loginAction(_: unknown, formData: FormData): Promise<{ err
   }
   const email = String(formData.get("email") || "").trim().toLowerCase();
   const password = String(formData.get("password") || "");
-  const expectedEmail = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+  const expectedEmail = creds.email;
   // compara sempre o hash (mesmo com e-mail errado) para não revelar quais e-mails existem
-  const passOk = await bcrypt.compare(password, adminPasswordHash()).catch(() => false);
+  const passOk = await bcrypt.compare(password, creds.hash).catch(() => false);
   if (!passOk || email !== expectedEmail) {
     return { error: "E-mail ou senha incorretos." };
   }

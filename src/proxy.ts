@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { jwtVerify } from "jose";
+import { sessionSecret } from "@/lib/env";
 
 const COOKIE = "hp_admin";
 
@@ -10,9 +11,10 @@ export async function proxy(request: NextRequest) {
 
   const token = request.cookies.get(COOKIE)?.value;
   let ok = false;
-  if (token && (process.env.AUTH_SECRET?.length ?? 0) >= 32) {
+  const secret = await sessionSecret();
+  if (token && secret) {
     try {
-      const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.AUTH_SECRET), { algorithms: ["HS256"] });
+      const { payload } = await jwtVerify(token, secret, { algorithms: ["HS256"] });
       ok = payload.role === "admin";
     } catch {
       ok = false;

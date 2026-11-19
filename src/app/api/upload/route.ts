@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { SignJWT } from "jose";
+import { sessionSecret } from "@/lib/env";
 import { z } from "zod";
 import { getSession } from "@/lib/auth";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
       const token = await new SignJWT({ path: target.path, max: size })
         .setProtectedHeader({ alg: "HS256" })
         .setExpirationTime("15m")
-        .sign(new TextEncoder().encode(process.env.AUTH_SECRET || ""));
+        .sign((await sessionSecret())!);
       target.uploadUrl += `&token=${encodeURIComponent(token)}`;
     }
     return NextResponse.json(target);
