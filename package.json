@@ -1,0 +1,32 @@
+{
+  "name": "hunttter-producoes",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "hash-password": "node scripts/hash-password.mjs",
+    "media:demo": "node scripts/generate-demo-media.mjs",
+    "seed:supabase": "node scripts/seed-supabase.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.119.2",
+    "bcryptjs": "3.0.3",
+    "jose": "6.2.18",
+    "lucide-react": "1.76.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "4.3.5",
+    "typescript": "^5.9"
+  }
+}

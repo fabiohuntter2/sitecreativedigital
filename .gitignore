@@ -1,0 +1,19 @@
+# dependências e build
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# SEGREDOS — nunca enviar ao GitHub
+.env
+.env.local
+.env.*.local
+
+# dados locais (banco em arquivo e uploads)
+data/
+*.tmp
+
+# configurações locais do editor/assistente
+.claude/
+.vercel

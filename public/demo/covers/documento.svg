@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e1b4b"/><stop offset="1" stop-color="#0f766e"/></linearGradient>
+<radialGradient id="r" cx=".8" cy=".2" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern></defs>
+<rect width="800" height="600" fill="#090909"/><rect width="800" height="600" fill="url(#g)" opacity=".85"/><rect width="800" height="600" fill="url(#p)"/><rect width="800" height="600" fill="url(#r)"/>
+<g fill="none" stroke="#fff" stroke-width="10" stroke-opacity=".85"><path d="M300 90 H460 L520 150 V390 H300 Z"/><path d="M460 90 V150 H520"/><path d="M340 210 H480 M340 250 H480 M340 290 H430"/></g><circle cx="500" cy="360" r="46" fill="#39d6a0"/><path d="M478 360 l16 16 l30 -32" stroke="#090909" stroke-width="10" fill="none"/>
+<text x="48" y="500" font-family="Arial, sans-serif" font-weight="800" font-size="54" fill="#fff">Registro de Músicas</text>
+<text x="50" y="545" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity=".75">ORIENTAÇÃO · DOCUMENTAÇÃO</text>
+</svg>
