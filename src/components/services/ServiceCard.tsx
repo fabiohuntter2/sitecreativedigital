@@ -8,7 +8,7 @@ import { serviceWhatsappMessage, waLink } from "@/lib/whatsapp";
 export function ServiceCard({ service, whatsapp, index = 0 }: { service: Service; whatsapp: string; index?: number }) {
   return (
     <article
-      className="glow-card glass reveal group flex h-full flex-col rounded-3xl p-7 transition duration-500 hover:-translate-y-1.5"
+      className="tilt glow-card glass reveal group flex h-full flex-col rounded-3xl p-7 transition duration-500 hover:-translate-y-1.5"
       style={{ "--d": `${index * 70}ms` } as React.CSSProperties}
     >
       <span className="spot" aria-hidden="true" />

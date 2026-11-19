@@ -29,8 +29,8 @@
   --animate-beam: beam 9s ease-in-out infinite;
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -14px; }
   }
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -188,6 +188,70 @@ input[type="range"].seek::-moz-range-thumb {
 }
 select.field option { background: #171717; }
 
+/* ---------- Motion design ---------- */
+
+/* títulos revelados palavra por palavra */
+.split-words .w {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em) rotateX(-40deg);
+  filter: blur(6px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+  transition-delay: calc(var(--i, 0) * 55ms + var(--d, 0ms));
+}
+.split-words.is-visible .w { opacity: 1; transform: none; filter: none; }
+/* trechos em degradê continuam quebrando linha normalmente (só fade + desfoque) */
+.split-words .w.text-gradient { display: inline; transform: none; }
+
+/* cards 3D: resposta rápida ao mouse sem perder a entrada suave */
+.tilt { transform-style: preserve-3d; transition: transform .25s ease-out, box-shadow .3s ease; will-change: transform; }
+.reveal.tilt.is-visible { transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .25s ease-out; transition-delay: var(--d, 0ms), 0s; }
+.tilt:hover { box-shadow: 0 30px 60px -25px rgba(113,59,206,.55); }
+
+/* botões magnéticos */
+.magnetic { transition: translate .25s cubic-bezier(.2,.7,.2,1); }
+
+/* cursor personalizado */
+.cursor-dot, .cursor-ring {
+  position: fixed; left: 0; top: 0; opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.cursor-dot {
+  width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+  background: #39d6a0; box-shadow: 0 0 12px #39d6a0;
+}
+.cursor-ring {
+  width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+  border: 1.5px solid rgba(155,109,250,.75);
+  box-shadow: 0 0 22px rgba(113,59,206,.45), inset 0 0 12px rgba(57,214,160,.2);
+  transition: opacity .3s ease, width .25s ease, height .25s ease, margin .25s ease, background .25s ease, border-color .25s ease;
+}
+.cursor-ring[data-hover="1"] {
+  width: 58px; height: 58px; margin: -29px 0 0 -29px;
+  background: rgba(57,214,160,.08); border-color: rgba(57,214,160,.8);
+}
+.cursor-ring[data-down="1"] { width: 24px; height: 24px; margin: -12px 0 0 -12px; }
+
+/* transição entre páginas */
+.page-enter { animation: page-in .6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* linha do processo que se desenha com a rolagem */
+.progress-line { transform-origin: left; transform: scaleX(var(--progress, 0)); }
+.progress-step {
+  opacity: clamp(.3, calc(var(--progress, 0) * 4.2 - var(--i, 0)), 1);
+  transform: translateY(calc((1 - clamp(0, calc(var(--progress, 0) * 4.2 - var(--i, 0)), 1)) * 18px));
+}
+.progress-step .step-dot {
+  box-shadow: 0 0 0 8px #090909, 0 0 calc(clamp(0, calc(var(--progress, 0) * 4.2 - var(--i, 0)), 1) * 34px) rgba(57,214,160,.6);
+}
+
+/* visualizador de áudio */
+.viz-canvas { width: 100%; height: 100%; display: block; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -196,4 +260,8 @@ select.field option { background: #171717; }
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .split-words .w { opacity: 1; transform: none; filter: none; }
+  .progress-step { opacity: 1; transform: none; }
+  .progress-line { transform: none; }
+  .page-enter { animation: none; }
 }

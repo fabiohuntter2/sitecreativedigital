@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 type Variant = "primary" | "ghost" | "whatsapp" | "outline";
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition duration-300 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-60";
+  "magnetic group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition duration-300 active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -77,7 +77,7 @@ export function SectionHeading({
   return (
     <div className={`reveal mb-12 max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <Tag className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight text-balance sm:text-4xl lg:text-5xl">
+      <Tag className="split-words mt-5 font-display text-3xl font-bold leading-tight tracking-tight text-balance sm:text-4xl lg:text-5xl">
         {title}
       </Tag>
       {text && <p className="mt-5 text-base leading-relaxed text-mute sm:text-lg">{text}</p>}

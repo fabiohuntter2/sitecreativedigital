@@ -8,7 +8,7 @@ export function WhatsAppFloat({ number, message }: { number: string; message: st
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Conversar pelo WhatsApp"
-      className="group fixed bottom-5 right-5 z-40 flex items-center gap-3 sm:bottom-7 sm:right-7"
+      className="magnetic group fixed bottom-5 right-5 z-40 flex items-center gap-3 sm:bottom-7 sm:right-7"
     >
       <span className="pointer-events-none hidden translate-x-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink opacity-0 shadow-xl transition group-hover:translate-x-0 group-hover:opacity-100 sm:block">
         Fale conosco

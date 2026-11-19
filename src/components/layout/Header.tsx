@@ -75,7 +75,7 @@ export function Header({ logoUrl }: { logoUrl?: string }) {
         <div className="flex items-center gap-3">
           <Link
             href="/orcamento"
-            className="hidden rounded-full bg-gradient-to-r from-purple to-green px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_30px_-10px_rgba(113,59,206,.9)] transition hover:-translate-y-0.5 sm:inline-flex"
+            className="magnetic hidden rounded-full bg-gradient-to-r from-purple to-green px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_30px_-10px_rgba(113,59,206,.9)] transition hover:-translate-y-0.5 sm:inline-flex"
           >
             Solicitar Orçamento
           </Link>

@@ -115,6 +115,7 @@ export type Settings = {
     heroHighlight: string;
     heroSubtitle: string;
     heroImage: string;
+    heroVideo: string;
     aboutTitle: string;
     aboutText: string;
     aboutImage: string;

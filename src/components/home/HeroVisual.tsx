@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { LogoMark } from "@/components/brand/Logo";
+import { Stage3D } from "@/components/motion/Stage3D";
 
 /**
  * Composição cinematográfica do banner: estúdio (forma de onda), câmera (visor REC),
@@ -8,13 +9,14 @@ import { LogoMark } from "@/components/brand/Logo";
 export function HeroVisual({ image }: { image?: string }) {
   const bars = [0.4, 0.7, 0.55, 0.9, 0.5, 1, 0.65, 0.8, 0.45, 0.95, 0.6, 0.75, 0.5, 0.85, 0.4, 0.7];
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[560px] select-none" aria-hidden="true">
+    <Stage3D className="relative mx-auto aspect-square w-full max-w-[560px] select-none" max={10}>
+    <div className="relative h-full w-full" style={{ transformStyle: "preserve-3d" }} aria-hidden="true">
       {/* anel orbital */}
       <div className="absolute inset-[12%] rounded-full bg-[conic-gradient(from_0deg,#713bce,#39d6a0,#713bce00_60%,#713bce)] p-[2px] animate-spin-slow">
         <div className="h-full w-full rounded-full bg-ink" />
       </div>
       <div className="absolute inset-[12%] rounded-full bg-purple/25 blur-3xl animate-pulse-glow" />
-      <div className="absolute inset-[18%] overflow-hidden rounded-full border border-white/10 bg-gradient-to-br from-graphite to-ink">
+      <div className="absolute inset-[18%] overflow-hidden rounded-full border border-white/10 bg-gradient-to-br from-graphite to-ink" style={{ transform: "translateZ(30px)" }}>
         {image ? (
           <Image src={image} alt="" fill priority sizes="(max-width: 768px) 70vw, 400px" className="object-cover" />
         ) : (
@@ -26,7 +28,7 @@ export function HeroVisual({ image }: { image?: string }) {
       </div>
 
       {/* card: estúdio de áudio */}
-      <div className="glass absolute left-0 top-[6%] w-[46%] rounded-2xl p-3.5 shadow-2xl animate-float">
+      <div className="glass absolute left-0 top-[6%] w-[46%] rounded-2xl p-3.5 shadow-2xl animate-float" style={{ transform: "translateZ(80px)" }}>
         <div className="mb-2 flex items-center justify-between text-[0.6rem] font-semibold uppercase tracking-widest text-mute">
           <span>Studio · Mix</span>
           <span className="flex items-center gap-1 text-red-400">
@@ -48,7 +50,7 @@ export function HeroVisual({ image }: { image?: string }) {
       </div>
 
       {/* card: câmera */}
-      <div className="glass absolute right-0 top-[16%] w-[38%] rounded-2xl p-3 shadow-2xl animate-float-slow">
+      <div className="glass absolute right-0 top-[16%] w-[38%] rounded-2xl p-3 shadow-2xl animate-float-slow" style={{ transform: "translateZ(55px)" }}>
         <div className="relative aspect-video rounded-lg border border-white/10 bg-gradient-to-br from-purple/30 via-ink to-green/20">
           {["left-1 top-1 border-l-2 border-t-2", "right-1 top-1 border-r-2 border-t-2", "left-1 bottom-1 border-b-2 border-l-2", "right-1 bottom-1 border-b-2 border-r-2"].map((c) => (
             <span key={c} className={`absolute h-3 w-3 border-white/80 ${c}`} />
@@ -63,7 +65,7 @@ export function HeroVisual({ image }: { image?: string }) {
       </div>
 
       {/* card: código */}
-      <div className="glass absolute bottom-[12%] left-[2%] w-[42%] rounded-2xl p-3 font-mono text-[0.58rem] leading-relaxed shadow-2xl animate-float-slow">
+      <div className="glass absolute bottom-[12%] left-[2%] w-[42%] rounded-2xl p-3 font-mono text-[0.58rem] leading-relaxed shadow-2xl animate-float-slow" style={{ transform: "translateZ(100px)" }}>
         <div className="mb-1.5 flex gap-1">
           <span className="h-2 w-2 rounded-full bg-red-400/80" />
           <span className="h-2 w-2 rounded-full bg-amber-300/80" />
@@ -76,7 +78,7 @@ export function HeroVisual({ image }: { image?: string }) {
       </div>
 
       {/* card: linha do tempo de vídeo */}
-      <div className="glass absolute bottom-[4%] right-[2%] w-[48%] rounded-2xl p-3 shadow-2xl animate-float">
+      <div className="glass absolute bottom-[4%] right-[2%] w-[48%] rounded-2xl p-3 shadow-2xl animate-float" style={{ transform: "translateZ(70px)" }}>
         <div className="mb-2 flex items-center justify-between text-[0.6rem] font-semibold uppercase tracking-widest text-mute">
           <span>Timeline · Edição</span>
           <span className="text-green">00:42</span>
@@ -110,5 +112,6 @@ export function HeroVisual({ image }: { image?: string }) {
       ))}
       <style>{`@keyframes playhead { from { left: 0% } to { left: 100% } }`}</style>
     </div>
+    </Stage3D>
   );
 }

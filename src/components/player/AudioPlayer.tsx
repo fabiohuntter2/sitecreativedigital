@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ListMusic, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { ExampleBadge } from "@/components/ui/Primitives";
 import { formatTime } from "@/lib/media";
+import { AudioVisualizer, connectAnalyser } from "./AudioVisualizer";
 
 export type Track = { id: string; title: string; subtitle?: string; url: string; cover?: string; isExample?: boolean };
 
@@ -47,6 +48,7 @@ export function AudioPlayer({ tracks, compact = false }: { tracks: Track[]; comp
   const toggle = useCallback(() => {
     const a = audioRef.current;
     if (!a) return;
+    if (a.paused) connectAnalyser(a);
     if (a.paused) a.play().catch(() => setError("Não foi possível reproduzir este arquivo."));
     else a.pause();
   }, []);
@@ -54,6 +56,7 @@ export function AudioPlayer({ tracks, compact = false }: { tracks: Track[]; comp
   const go = useCallback(
     (dir: 1 | -1) => {
       if (!tracks.length) return;
+      if (audioRef.current) connectAnalyser(audioRef.current);
       autoplayNext.current = true;
       setIndex((i) => (i + dir + tracks.length) % tracks.length);
     },
@@ -62,6 +65,7 @@ export function AudioPlayer({ tracks, compact = false }: { tracks: Track[]; comp
 
   const select = (i: number) => {
     if (i === index) return toggle();
+    if (audioRef.current) connectAnalyser(audioRef.current);
     autoplayNext.current = true;
     setIndex(i);
   };
@@ -101,6 +105,7 @@ export function AudioPlayer({ tracks, compact = false }: { tracks: Track[]; comp
         <audio
           ref={audioRef}
           preload="metadata"
+          crossOrigin="anonymous"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
@@ -111,7 +116,11 @@ export function AudioPlayer({ tracks, compact = false }: { tracks: Track[]; comp
           <source src={track.url} />
         </audio>
 
-        <div className="relative mt-7">
+        <div className="relative mt-6 h-16 sm:h-20">
+          <AudioVisualizer audioRef={audioRef} playing={playing} />
+        </div>
+
+        <div className="relative mt-4">
           <input
             type="range"
             className="seek w-full"

@@ -13,7 +13,7 @@ export function PortfolioCard({ item, index = 0 }: { item: PortfolioItem; index?
     <article className="reveal group relative" style={{ "--d": `${(index % 6) * 60}ms` } as React.CSSProperties}>
       <Link
         href={`/portfolio/${item.slug}`}
-        className="glow-card block overflow-hidden rounded-3xl border border-white/10 bg-graphite"
+        className="tilt glow-card block overflow-hidden rounded-3xl border border-white/10 bg-graphite"
       >
         <div className="relative aspect-[4/3] overflow-hidden">
           {item.cover_url ? (

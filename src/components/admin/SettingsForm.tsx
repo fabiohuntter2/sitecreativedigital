@@ -8,7 +8,7 @@ import type { Settings } from "@/lib/types";
 import { UploadField } from "./UploadField";
 
 type Section = keyof Settings;
-type F = { key: string; label: string; type?: "text" | "textarea" | "upload"; help?: string };
+type F = { key: string; label: string; type?: "text" | "textarea" | "upload"; help?: string; accept?: string };
 
 const GROUPS: { section: Section; title: string; desc: string; fields: F[] }[] = [
   {
@@ -24,6 +24,7 @@ const GROUPS: { section: Section; title: string; desc: string; fields: F[] }[] =
       { key: "heroHighlight", label: "Banner — frase de impacto (parte em gradiente)" },
       { key: "heroSubtitle", label: "Banner — texto de apoio", type: "textarea" },
       { key: "heroImage", label: "Banner — foto central (opcional)", type: "upload", help: "Imagem quadrada; aparece dentro do anel luminoso." },
+      { key: "heroVideo", label: "Banner — vídeo de fundo (opcional)", type: "upload", accept: "video/*", help: "MP4 curto e leve (até ~2 MB), sem som. Vazio = sem vídeo." },
       { key: "aboutTitle", label: "Quem somos — título" },
       { key: "aboutText", label: "Quem somos — texto", type: "textarea", help: "Separe parágrafos com uma linha em branco." },
       { key: "aboutImage", label: "Quem somos — foto", type: "upload", help: "Formato retrato (4:5) recomendado." },
@@ -110,7 +111,7 @@ export function SettingsForm({ initial }: { initial: Settings }) {
                     {f.type === "textarea" ? (
                       <textarea id={id} rows={f.key === "aboutText" ? 6 : 3} className="field resize-y" value={value} onChange={(e) => set(g.section, f.key, e.target.value)} />
                     ) : f.type === "upload" ? (
-                      <UploadField id={id} value={value} onChange={(v) => set(g.section, f.key, v)} accept="image/*" />
+                      <UploadField id={id} value={value} onChange={(v) => set(g.section, f.key, v)} accept={f.accept ?? "image/*"} />
                     ) : (
                       <input id={id} className="field" value={value} onChange={(e) => set(g.section, f.key, e.target.value)} />
                     )}

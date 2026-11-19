@@ -34,10 +34,10 @@ export function AboutSection({ settings }: { settings: Settings }) {
     { t: "Marketing", d: "Conteúdo que gera presença." },
   ];
   return (
-    <section className="relative py-24 sm:py-32" aria-labelledby="sobre-titulo">
+    <section id="sobre" className="relative scroll-mt-24 py-24 sm:py-32" aria-labelledby="sobre-titulo">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
         <div className="reveal relative order-2 lg:order-1">
-          <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-graphite to-ink">
+          <div data-parallax="-0.06" className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-graphite to-ink">
             {site.aboutImage ? (
               <SmartImage src={site.aboutImage} alt={site.aboutPersonName ? `${site.aboutPersonName}${site.aboutPersonRole ? `, ${site.aboutPersonRole}` : ""} da ${site.name}` : `Equipe ${site.name}`} fill sizes="(max-width: 1024px) 90vw, 450px" className="object-cover object-top" />
             ) : (
@@ -53,8 +53,8 @@ export function AboutSection({ settings }: { settings: Settings }) {
               </p>
             </div>
           </div>
-          <div aria-hidden="true" className="absolute -left-6 -top-6 -z-10 h-40 w-40 rounded-full bg-purple/40 blur-3xl" />
-          <div aria-hidden="true" className="absolute -bottom-8 -right-4 -z-10 h-40 w-40 rounded-full bg-green/25 blur-3xl" />
+          <div aria-hidden="true" data-parallax="0.18" className="absolute -left-6 -top-6 -z-10 h-40 w-40 rounded-full bg-purple/40 blur-3xl" />
+          <div aria-hidden="true" data-parallax="-0.18" className="absolute -bottom-8 -right-4 -z-10 h-40 w-40 rounded-full bg-green/25 blur-3xl" />
         </div>
         <div className="order-1 lg:order-2">
           <SectionHeading align="left" eyebrow="Quem somos" title={<span id="sobre-titulo">{site.aboutTitle}</span>} />
@@ -88,11 +88,12 @@ export function ProcessSection() {
     <section className="relative py-24 sm:py-28" aria-labelledby="processo-titulo">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading eyebrow="Como trabalhamos" title={<span id="processo-titulo">Do primeiro contato <span className="text-gradient">à entrega final</span></span>} />
-        <ol className="relative grid gap-5 md:grid-cols-4">
-          <div aria-hidden="true" className="absolute left-0 right-0 top-9 hidden h-px bg-gradient-to-r from-transparent via-purple/60 to-transparent md:block" />
+        <ol data-progress className="relative grid gap-5 md:grid-cols-4">
+          <div aria-hidden="true" className="absolute left-[12.5%] right-[12.5%] top-9 hidden h-px bg-white/10 md:block" />
+          <div aria-hidden="true" className="progress-line absolute left-[12.5%] right-[12.5%] top-[35px] hidden h-[3px] rounded-full bg-gradient-to-r from-purple via-[#8b5cf6] to-green shadow-[0_0_14px_rgba(57,214,160,.6)] md:block" />
           {steps.map(({ Icon, t, d }, i) => (
-            <li key={t} className="reveal relative text-center" style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-              <span className="relative mx-auto grid h-[4.5rem] w-[4.5rem] place-items-center rounded-full border border-white/10 bg-ink shadow-[0_0_0_8px_#090909]">
+            <li key={t} className="progress-step relative text-center" style={{ "--i": i } as React.CSSProperties}>
+              <span className="step-dot relative mx-auto grid h-[4.5rem] w-[4.5rem] place-items-center rounded-full border border-white/10 bg-ink">
                 <span className="absolute inset-0 rounded-full bg-gradient-to-br from-purple/40 to-green/20 blur-md" />
                 <Icon className="relative h-7 w-7 text-green" />
               </span>
@@ -146,7 +147,7 @@ export function TestimonialsSection({ items }: { items: Testimonial[] }) {
         <SectionHeading eyebrow="Depoimentos" title={<span id="depo-titulo">O que dizem <span className="text-gradient">nossos clientes</span></span>} />
         <div className="grid gap-5 md:grid-cols-3">
           {items.map((t, i) => (
-            <figure key={t.id} className="glow-card glass reveal flex flex-col rounded-3xl p-7" style={{ "--d": `${i * 80}ms` } as React.CSSProperties}>
+            <figure key={t.id} className="tilt glow-card glass reveal flex flex-col rounded-3xl p-7" style={{ "--d": `${i * 80}ms` } as React.CSSProperties}>
               <span className="spot" aria-hidden="true" />
               <div className="flex items-center justify-between">
                 <MessageSquareQuote className="h-8 w-8 text-purple-soft" />

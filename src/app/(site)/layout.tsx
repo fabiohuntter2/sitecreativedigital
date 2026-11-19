@@ -2,6 +2,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { Effects } from "@/components/ui/Effects";
+import { CursorGlow } from "@/components/motion/CursorGlow";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { getServices, getSettings } from "@/lib/content";
 import { SITE_URL } from "@/lib/constants";
 
@@ -32,11 +34,13 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   return (
     <>
+      <ScrollProgress />
       <Header logoUrl={settings.site.logoUrl} />
       <main id="conteudo">{children}</main>
       <Footer settings={settings} services={services} />
       <WhatsAppFloat number={settings.contact.whatsapp} message={settings.contact.whatsappMessage} />
       <Effects />
+      <CursorGlow />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }}

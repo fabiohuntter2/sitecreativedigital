@@ -78,6 +78,7 @@ export const settingsSchema = z.object({
     heroHighlight: z.string().max(160),
     heroSubtitle: z.string().max(600),
     heroImage: z.string().max(1000),
+    heroVideo: z.string().max(1000),
     aboutTitle: z.string().max(200),
     aboutText: z.string().max(4000),
     aboutImage: z.string().max(1000),
