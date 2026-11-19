@@ -86,6 +86,13 @@ Os uploads vão direto do navegador para o Supabase por URL assinada e temporár
 
 ## 6. Publicando na internet (Vercel, recomendado)
 
+> **Configuração atual (no ar em https://sitecreativedigital.vercel.app):** o projeto usa a **integração Supabase da Vercel** (Storage › Supabase).
+> O site lê sozinho as variáveis que a integração cria (`NEXT_PUBLIC_SUPABASE_URL`/`SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`/`SUPABASE_SECRET_KEY`).
+> Ele também deriva o segredo de sessão da chave secreta e lê o login do painel da linha `admin` da tabela `settings`.
+> Num banco vazio, o conteúdo inicial e o bucket são criados automaticamente na primeira visita.
+> Para trocar a senha do painel: gere o hash com `npm run hash-password` e atualize essa linha no editor SQL do Supabase.
+> O passo a passo abaixo vale para quem prefere cadastrar as variáveis manualmente.
+
 1. Envie o projeto para um repositório no GitHub (o `.gitignore` já ignora `.env.local` e `data/`).
 2. Em https://vercel.com › **Add New › Project**, importe o repositório.
 3. Em **Environment Variables**, cadastre:
