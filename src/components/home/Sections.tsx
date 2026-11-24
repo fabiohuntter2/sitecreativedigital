@@ -1,6 +1,7 @@
 import { ArrowRight, Headphones, MessageSquareQuote, PenTool, Rocket, Search, Star } from "lucide-react";
 import { LogoMark } from "@/components/brand/Logo";
 import { ButtonLink, ExampleBadge, SectionHeading } from "@/components/ui/Primitives";
+import { ScrollFrames } from "@/components/ui/ScrollFrames";
 import { SmartImage } from "@/components/ui/SmartImage";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import type { Settings, ShowcaseMedia, Testimonial } from "@/lib/types";
@@ -25,6 +26,10 @@ export function Marquee() {
   );
 }
 
+/** Foto do "Quem somos": ao rolar a página, o Fabio coloca o fone no ouvido. */
+const ABOUT_HEADPHONE_PHOTO = "fabio-huntter-ceo.webp";
+const ABOUT_HEADPHONE_OFF_FRAME = "/trabalhos/img/fabio-huntter-ceo-sem-fone.webp";
+
 export function AboutSection({ settings }: { settings: Settings }) {
   const { site } = settings;
   const pillars = [
@@ -38,7 +43,13 @@ export function AboutSection({ settings }: { settings: Settings }) {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
         <div className="reveal relative order-2 lg:order-1">
           <div data-parallax="-0.06" className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-graphite to-ink">
-            {site.aboutImage ? (
+            {site.aboutImage && site.aboutImage.includes(ABOUT_HEADPHONE_PHOTO) ? (
+              <ScrollFrames
+                frames={[ABOUT_HEADPHONE_OFF_FRAME, site.aboutImage]}
+                alt={site.aboutPersonName ? `${site.aboutPersonName}${site.aboutPersonRole ? `, ${site.aboutPersonRole}` : ""} da ${site.name}` : `Equipe ${site.name}`}
+                sizes="(max-width: 1024px) 90vw, 450px"
+              />
+            ) : site.aboutImage ? (
               <SmartImage src={site.aboutImage} alt={site.aboutPersonName ? `${site.aboutPersonName}${site.aboutPersonRole ? `, ${site.aboutPersonRole}` : ""} da ${site.name}` : `Equipe ${site.name}`} fill sizes="(max-width: 1024px) 90vw, 450px" className="object-cover object-top" />
             ) : (
               <div className="grid h-full place-items-center">
